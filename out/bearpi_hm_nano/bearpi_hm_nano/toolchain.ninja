@@ -1,0 +1,119 @@
+rule cxx
+  command = riscv32-unknown-elf-g++ ${defines} ${include_dirs} ${cflags_cc} -c ${in} -o ${out}
+  description = gcc CXX ${out}
+  depfile = ${out}.d
+  deps = gcc
+rule alink
+  command = riscv32-unknown-elf-ar cr ${out} @"${out}.rsp"
+  description = AR ${out}
+  rspfile = ${out}.rsp
+  rspfile_content = ${in}
+rule link
+  command = riscv32-unknown-elf-gcc ${ldflags}  -Wl,--start-group ${in} ${libs} -Wl,--end-group -o ${output_dir}/bin/${target_output_name}${output_extension} && riscv32-unknown-elf-strip --strip-unneeded ${output_dir}/bin/${target_output_name}${output_extension}
+  description = LINK ${output_dir}/bin/${target_output_name}${output_extension}
+  rspfile = ${output_dir}/bin/${target_output_name}${output_extension}.rsp
+  rspfile_content = ${in}
+rule solink
+  command = riscv32-unknown-elf-gcc -shared ${ldflags}  -Wl,--start-group ${in} ${libs} -Wl,--end-group -o ${output_dir}/${target_output_name}${output_extension}&& riscv32-unknown-elf-strip --strip-unneeded ${output_dir}/${target_output_name}${output_extension}
+  description = SOLINK ${output_dir}/${target_output_name}${output_extension}
+  rspfile = ${out}.rsp
+  rspfile_content = ${in}
+rule stamp
+  command = /usr/bin/touch ${out}
+  description = STAMP ${out}
+rule asm
+  command = riscv32-unknown-elf-gcc ${defines} ${include_dirs} ${asmflags} ${in} -c -o ${out}
+  description = gcc cross compiler ${out}
+  depfile = ${out}.d
+  deps = gcc
+rule cc
+  command = riscv32-unknown-elf-gcc ${defines} ${include_dirs} ${cflags} ${cflags_c} -c ${in} -o ${out}
+  description = gcc cross compiler ${out}
+rule copy
+  command = cp -afd ${in} ${out}
+  description = COPY ${in} ${out}
+
+build obj/applications/sample/BearPi/BearPi-HM_Nano/sample/sample.stamp: stamp ./libs/libcloud_oc_agriculture.a
+subninja obj/applications/sample/BearPi/BearPi-HM_Nano/sample/e53_ia1_smart_agriculture_sample/cloud_oc_agriculture.ninja
+subninja obj/base/hiviewdfx/hievent_lite/hievent_lite.ninja
+subninja obj/base/hiviewdfx/hilog_lite/frameworks/mini/hilog_lite.ninja
+build obj/base/hiviewdfx/hilog_lite/frameworks/mini/hilog_lite_ndk.stamp: stamp ./libs/libhilog_lite.a
+subninja obj/base/hiviewdfx/hiview_lite/hiview_lite.ninja
+build obj/base/iot_hardware/peripheral/iothardware.stamp: stamp ./libs/libhal_iothardware.a
+build obj/base/iot_hardware/peripheral/iothardware_ndk.stamp: stamp ./libs/libhal_iothardware.a
+build obj/base/security/deviceauth/frameworks/deviceauth_lite/hichainsdk.stamp: stamp ./libs/libhichainsdk.a
+subninja obj/base/security/deviceauth/frameworks/deviceauth_lite/source/hichainsdk.ninja
+subninja obj/base/startup/bootstrap_lite/services/source/bootstrap.ninja
+build obj/base/startup/syspara_lite/frameworks/parameter/parameter.stamp: stamp ./libs/libsysparam.a
+build obj/base/startup/syspara_lite/frameworks/parameter/parameter_notes.stamp: stamp ./libs/libsysparam.a
+subninja obj/base/startup/syspara_lite/frameworks/parameter/src/sysparam.ninja
+build obj/base/startup/syspara_lite/frameworks/token/token.stamp: stamp ./libs/libtoken_static.a
+build obj/base/startup/syspara_lite/frameworks/token/token_notes.stamp: stamp
+subninja obj/base/startup/syspara_lite/frameworks/token/token_static.ninja
+build obj/base/update/ota_lite/frameworks/ota_lite.stamp: stamp ./libs/libhota.a
+build obj/base/update/ota_lite/frameworks/test.stamp: stamp
+build obj/base/update/ota_lite/frameworks/update_api.stamp: stamp
+subninja obj/base/update/ota_lite/frameworks/source/hota.ninja
+rule __build_lite_gen_rootfs___build_lite_toolchain_riscv32-unknown-elf__rule
+  command = /home/gec/downloads/ohos/Python-3.8.5/build/bin/python3 ../../../build/lite/gen_rootfs.py --path=/home/gec/ohos/my_bearpi_hm_nano_agriculture/out/bearpi_hm_nano/bearpi_hm_nano --kernel=liteos_m --storage= --strip_command=riscv32-unknown-elf-strip\$ --strip-unneeded --dmverity=false
+  description = ACTION //build/lite:gen_rootfs(//build/lite/toolchain:riscv32-unknown-elf)
+  restat = 1
+
+build gen/build/lite/gen_rootfs.log: __build_lite_gen_rootfs___build_lite_toolchain_riscv32-unknown-elf__rule | ../../../build/lite/gen_rootfs.py obj/build/lite/ohos.stamp
+
+build obj/build/lite/gen_rootfs.stamp: stamp gen/build/lite/gen_rootfs.log
+build obj/build/lite/ndk.stamp: stamp
+build obj/build/lite/ohos.stamp: stamp obj/applications/sample/BearPi/BearPi-HM_Nano/sample/sample.stamp obj/base/iot_hardware/peripheral/iothardware.stamp ./libs/libhilog_lite.a ./libs/libhievent_lite.a obj/foundation/distributedschedule/samgr_lite/samgr.stamp obj/base/security/deviceauth/frameworks/deviceauth_lite/hichainsdk.stamp ./libs/libbootstrap.a obj/base/startup/syspara_lite/frameworks/parameter/parameter.stamp obj/base/startup/syspara_lite/frameworks/token/token.stamp obj/foundation/communication/wifi_lite/wifi.stamp ./libs/libwifiaware.a obj/base/update/ota_lite/frameworks/ota_lite.stamp obj/domains/iot/link/link.stamp obj/utils/native/lite/file/file.stamp obj/utils/native/lite/kv_store/kv_store.stamp obj/utils/native/lite/os_dump/utils_os_dump.stamp obj/device/bearpi/bearpi_hm_nano/sdk_liteos/wifiiot_sdk.stamp obj/device/bearpi/bearpi_hm_nano/bearpi_hm_nano.stamp obj/vendor/bearpi/bearpi_hm_nano/bearpi_hm_nano.stamp
+build obj/build/lite/config/component/cJSON/cjson_ndk.stamp: stamp obj/build/lite/config/component/cJSON/cjson_shared.stamp
+build obj/build/lite/config/component/cJSON/cjson_shared.stamp: stamp
+subninja obj/build/lite/config/component/cJSON/cjson_static.ninja
+build obj/device/bearpi/bearpi_hm_nano/bearpi_hm_nano.stamp: stamp
+subninja obj/device/bearpi/bearpi_hm_nano/hi3861_adapter/hals/communication/wifi_lite/wifiaware/hal_wifiaware.ninja
+subninja obj/device/bearpi/bearpi_hm_nano/hi3861_adapter/hals/communication/wifi_lite/wifiservice/wifiservice.ninja
+build obj/device/bearpi/bearpi_hm_nano/hi3861_adapter/hals/communication/wifi_lite/wifiservice/wifiservice_ndk.stamp: stamp ./libs/libwifiservice.a
+subninja obj/device/bearpi/bearpi_hm_nano/hi3861_adapter/hals/iot_hardware/wifiiot_lite/hal_iothardware.ninja
+subninja obj/device/bearpi/bearpi_hm_nano/hi3861_adapter/hals/update/hal_update_static.ninja
+subninja obj/device/bearpi/bearpi_hm_nano/hi3861_adapter/hals/utils/file/hal_file_static.ninja
+build obj/device/bearpi/bearpi_hm_nano/hi3861_adapter/kal/kal.stamp: stamp ./libs/libposix.a ./libs/libcmsis.a
+subninja obj/device/bearpi/bearpi_hm_nano/hi3861_adapter/kal/cmsis/cmsis.ninja
+subninja obj/device/bearpi/bearpi_hm_nano/hi3861_adapter/kal/posix/posix.ninja
+rule __device_bearpi_bearpi_hm_nano_sdk_liteos_run_wifiiot_scons___build_lite_toolchain_riscv32-unknown-elf__rule
+  command = /home/gec/downloads/ohos/Python-3.8.5/build/bin/python3 ../../../build/lite/build_ext_components.py --path=../../../device/bearpi/bearpi_hm_nano/sdk_liteos --command=sh\$ hm_build.sh\$ /home/gec/ohos/my_bearpi_hm_nano_agriculture/out/bearpi_hm_nano/bearpi_hm_nano --target_dir=/home/gec/ohos/my_bearpi_hm_nano_agriculture/out/bearpi_hm_nano/bearpi_hm_nano/obj/device/bearpi/bearpi_hm_nano/sdk_liteos/build.log --out_dir=/home/gec/ohos/my_bearpi_hm_nano_agriculture/out/bearpi_hm_nano/bearpi_hm_nano/error.log
+  description = ACTION //device/bearpi/bearpi_hm_nano/sdk_liteos:run_wifiiot_scons(//build/lite/toolchain:riscv32-unknown-elf)
+  restat = 1
+
+build obj/device/bearpi/bearpi_hm_nano/sdk_liteos/run_wifiiot_scons_build_ext_components.txt: __device_bearpi_bearpi_hm_nano_sdk_liteos_run_wifiiot_scons___build_lite_toolchain_riscv32-unknown-elf__rule | ../../../build/lite/build_ext_components.py obj/base/security/deviceauth/frameworks/deviceauth_lite/hichainsdk.stamp obj/build/lite/ohos.stamp obj/device/bearpi/bearpi_hm_nano/sdk_liteos/sdk.stamp
+
+build obj/device/bearpi/bearpi_hm_nano/sdk_liteos/run_wifiiot_scons.stamp: stamp obj/device/bearpi/bearpi_hm_nano/sdk_liteos/run_wifiiot_scons_build_ext_components.txt
+build obj/device/bearpi/bearpi_hm_nano/sdk_liteos/sdk.stamp: stamp ./libs/libcjson_static.a obj/device/bearpi/bearpi_hm_nano/hi3861_adapter/kal/kal.stamp
+build obj/device/bearpi/bearpi_hm_nano/sdk_liteos/wifiiot_sdk.stamp: stamp obj/device/bearpi/bearpi_hm_nano/sdk_liteos/sdk.stamp
+build obj/domains/iot/link/iot.stamp: stamp obj/domains/iot/link/link.stamp
+build obj/domains/iot/link/link.stamp: stamp
+subninja obj/foundation/communication/wifi_aware/wifiaware.ninja
+build obj/foundation/communication/wifi_lite/wifi.stamp: stamp ./libs/libwifiservice.a
+build obj/foundation/distributedschedule/samgr_lite/config/system_capability.json: copy ../../../foundation/distributedschedule/samgr_lite/config/system_capability.json
+
+build obj/foundation/distributedschedule/samgr_lite/ConfigFiles.stamp: stamp obj/foundation/distributedschedule/samgr_lite/config/system_capability.json
+build obj/foundation/distributedschedule/samgr_lite/samgr.stamp: stamp ./libs/libsamgr.a ./libs/libbroadcast.a
+build obj/foundation/distributedschedule/samgr_lite/samgr_lite_ndk.stamp: stamp ./libs/libbroadcast.a ./libs/libsamgr.a
+subninja obj/foundation/distributedschedule/samgr_lite/communication/broadcast/broadcast.ninja
+subninja obj/foundation/distributedschedule/samgr_lite/samgr/samgr.ninja
+subninja obj/foundation/distributedschedule/samgr_lite/samgr/adapter/samgr_adapter.ninja
+subninja obj/foundation/distributedschedule/samgr_lite/samgr/source/samgr_source.ninja
+build obj/third_party/iot_link/iot_link.stamp: stamp ./libs/libinc.a ./libs/liblink_log.a ./libs/liblink_misc.a ./libs/libdtls.a ./libs/libmqtt.a ./libs/liboc_mqtt.a ./libs/libqueue.a
+subninja obj/third_party/iot_link/inc/inc.ninja
+subninja obj/third_party/iot_link/link_log/link_log.ninja
+subninja obj/third_party/iot_link/link_misc/link_misc.ninja
+subninja obj/third_party/iot_link/network/dtls/dtls.ninja
+subninja obj/third_party/iot_link/network/mqtt/mqtt.ninja
+subninja obj/third_party/iot_link/oc_mqtt/oc_mqtt.ninja
+subninja obj/third_party/iot_link/queue/queue.ninja
+build obj/utils/native/lite/file/file.stamp: stamp ./libs/libnative_file.a
+subninja obj/utils/native/lite/file/native_file.ninja
+build obj/utils/native/lite/kv_store/kv_store.stamp: stamp ./libs/libutils_kv_store.a
+subninja obj/utils/native/lite/kv_store/src/utils_kv_store.ninja
+subninja obj/utils/native/lite/os_dump/dump_static.ninja
+build obj/utils/native/lite/os_dump/utils_os_dump.stamp: stamp ./libs/libdump_static.a
+build obj/vendor/bearpi/bearpi_hm_nano/bearpi_hm_nano.stamp: stamp
+subninja obj/vendor/bearpi/bearpi_hm_nano/hals/utils/sys_param/hal_sysparam.ninja
+subninja obj/vendor/bearpi/bearpi_hm_nano/hals/utils/token/hal_token_static.ninja

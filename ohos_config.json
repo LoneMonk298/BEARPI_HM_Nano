@@ -1,0 +1,9 @@
+{
+  "root_path": "/home/gec/ohos/my_bearpi_hm_nano_agriculture",
+  "board": "bearpi_hm_nano",
+  "kernel": "liteos_m",
+  "product": "bearpi_hm_nano",
+  "product_path": "/home/gec/ohos/my_bearpi_hm_nano_agriculture/vendor/bearpi/bearpi_hm_nano",
+  "device_path": "/home/gec/ohos/my_bearpi_hm_nano_agriculture/device/bearpi/bearpi_hm_nano/sdk_liteos",
+  "patch_cache": null
+}

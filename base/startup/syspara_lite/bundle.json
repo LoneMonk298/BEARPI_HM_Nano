@@ -1,0 +1,24 @@
+{
+    "name": "@ohos/startup_syspara_lite",
+    "version": "1.1.4",
+    "publishAs": "code-segment",
+    "description": "Implementation of the syspara module | 系统属性实现模块",
+    "scripts": {
+    },
+    "repository": "https://gitee.com/openharmony/startup_syspara_lite/tree/OpenHarmony-v1.1.4-LTS",
+    "tags": [
+        "base"
+    ],
+    "ohos": {
+        "os": "1.1.4",
+        "kernel": "liteos-m,liteos-a,linux",
+        "board": "hi3516"
+    },
+    "license": "Apache V2",
+    "keywords": [
+        "startup","syspara","lite"
+    ],
+    "segment": {
+	"destPath": "base/startup/syspara_lite"
+    }
+}

@@ -1,0 +1,24 @@
+{
+    "name": "@ohos/hiviewdfx_hilog_lite",
+    "version": "1.1.4",
+    "publishAs": "code-segment",
+    "description": "MCU log module in the DFX subsystem | DFX-MCU日志模块 DFX-MCU日志模块",
+    "scripts": {
+    },
+    "repository": "https://gitee.com/openharmony/hiviewdfx_hilog_lite/tree/OpenHarmony-v1.1.4-LTS",
+    "tags": [
+        "base"
+    ],
+    "ohos": {
+        "os": "1.1.4",
+        "kernel": "liteos-m,liteos-a,linux",
+        "board": "hi3516"
+    },
+    "license": "Apache V2",
+    "keywords": [
+        "hiviewdfx","hilog","lite"
+    ],
+    "segment": {
+	"destPath": "base/hiviewdfx/hilog_lite"
+    }
+}

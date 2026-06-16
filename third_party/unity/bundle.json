@@ -1,0 +1,24 @@
+{
+    "name": "@ohos/unity",
+    "version": "1.1.4",
+    "publishAs": "code-segment",
+    "description": "Third-party open-source software Unity | 三方开源软件Unity",
+    "scripts": {
+    },
+    "repository": "https://gitee.com/openharmony/third_party_unity/tree/OpenHarmony-v1.1.4-LTS",
+    "tags": [
+        "third_party"
+    ],
+    "ohos": {
+        "os": "1.1.4",
+        "kernel": "linux",
+        "board": "hi3516"
+    },
+    "license": "MIT",
+    "keywords": [
+        "third-party","unity"
+    ],
+    "segment": {
+	"destPath": "third_party/unity"
+    }
+}

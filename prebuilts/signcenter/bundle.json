@@ -1,0 +1,24 @@
+{
+    "name": "@ohos/signcenter_tool",
+    "version": "1.1.4",
+    "publishAs": "code-segment",
+    "description": "",
+    "scripts": {
+    },
+    "repository": "https://gitee.com/openharmony/signcenter_tool/tree/OpenHarmony-v1.1.4-LTS",
+    "tags": [
+        "prebuilts"
+    ],
+    "ohos": {
+        "os": "1.1.4",
+        "kernel": "liteos-a,linux",
+        "board": "hi3516"
+    },
+    "license": "END USER LICENSE AGREEMENT",
+    "keywords": [
+        "signcenter-tool"
+    ],
+    "segment": {
+	"destPath": "prebuilts/signcenter"
+    }
+}

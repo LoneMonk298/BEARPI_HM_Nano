@@ -1,0 +1,24 @@
+{
+    "name": "@ohos/cjson",
+    "version": "1.1.4",
+    "publishAs": "code-segment",
+    "description": "Third-party open-source software cJSON | 三方开源软件cJSON",
+    "scripts": {
+    },
+    "repository": "https://gitee.com/openharmony/third_party_cJSON/tree/OpenHarmony-v1.1.4-LTS",
+    "tags": [
+        "third_party"
+    ],
+    "ohos": {
+        "os": "1.1.4",
+        "kernel": "liteos-m,liteos-a,linux",
+        "board": "hi3516"
+    },
+    "license": " MIT License",
+    "keywords": [
+        "third-party","cJSON"
+    ],
+    "segment": {
+	"destPath": "third_party/cJSON"
+    }
+}

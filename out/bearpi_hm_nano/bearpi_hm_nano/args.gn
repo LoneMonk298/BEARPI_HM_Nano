@@ -1,0 +1,9 @@
+ohos_build_compiler_specified = "gcc"
+product_path =
+    "/home/gec/ohos/my_bearpi_hm_nano_agriculture/vendor/bearpi/bearpi_hm_nano"
+device_path = "/home/gec/ohos/my_bearpi_hm_nano_agriculture/device/bearpi/bearpi_hm_nano/sdk_liteos"
+ohos_kernel_type = "liteos_m"
+ohos_build_type = "release"
+ohos_build_time = "1781166626001"
+ohos_build_datetime = "2026-06-10 18:30:26"
+ohos_full_compile = true

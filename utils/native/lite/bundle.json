@@ -1,0 +1,24 @@
+{
+    "name": "@ohos/utils_native_lite",
+    "version": "1.1.4",
+    "publishAs": "code-segment",
+    "description": "Utils library | 公共基础库",
+    "scripts": {
+    },
+    "repository": "https://gitee.com/openharmony/utils_native_lite/tree/OpenHarmony-v1.1.4-LTS",
+    "tags": [
+        "utils"
+    ],
+    "ohos": {
+        "os": "1.1.4",
+        "kernel": "liteos-m,liteos-a,linux",
+        "board": "hi3516"
+    },
+    "license": "Apache V2",
+    "keywords": [
+        "utils","native","lite"
+    ],
+    "segment": {
+	"destPath": "utils/native/lite"
+    }
+}
