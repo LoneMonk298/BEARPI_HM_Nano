@@ -12,5 +12,5 @@ This project is too large, so it's not recommended to clone or download the whol
 
 ## What's important
 
-`/applications` The main program source code is in the directory.Other directories are source code of BearPi
+The main program source code is `/applications` in the directory.Other directories are source code of BearPi
 Therefore,I recommended download `/applications/*`
